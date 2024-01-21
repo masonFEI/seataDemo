@@ -21,3 +21,5 @@ docker run --network common-network --env MODE=standalone --name nacos -d -p 884
 http://localhost:8848/nacos
 
 用户名/密码 nacos/nacos
+
+创建分组 SEATA_GROUP
