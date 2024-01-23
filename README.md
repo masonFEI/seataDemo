@@ -7,6 +7,15 @@ https://www.bilibili.com/video/BV16h4y1G7kd?p=1&vd_source=82c121d3d4cd2783d6bcb1
 ### jdk版本限制
 jdk 8
 
+### docker 操作
+
+docker network create common-network
+
+docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest --default-authentication-plugin=mysql_native_password
+
+docker cp mysql:/etc/my.cnf E:/dockerdata/mysql/conf/
+
+之后杀掉mysql容器，用下面命令重启
 
 ### 数据库启动语句
 docker run --name mysql -d --restart=always --network common-network -p 3306:3306 -v E:/dockerdata/mysql/data:/var/lib/mysql/ -v E:/dockerdata/mysql/conf/my.cnf:/etc/my.cnf -v E:/dockerdata/mysql/logs:/logs -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest --default-authentication-plugin=mysql_native_password  
