@@ -26,6 +26,11 @@ docker run --name mysql -d --restart=always --network common-network -p 3306:330
 
 docker run --network common-network --env MODE=standalone --name nacos -d -p 8848:8848 nacos/nacos-server
 
+
+### seata启动语句
+docker run --name  seata-server -d --restart always --network common-network  -p 8091:8091  -v E:/dockerdata/seata/seata-server:/seata-server -e SEATA_IP=192.168.80.180 -e SEATA_PORT=8091 seataio/seata-server:1.4.2
+
+
 ### nacos管理平台界面
 http://localhost:8848/nacos
 
