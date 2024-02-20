@@ -24,7 +24,7 @@ docker run --name mysql -d --restart=always --network common-network -p 3306:330
 ### nacos启动语句
 与数据库在一个网段中--network common-network
 
-docker run --network common-network --env MODE=standalone --name nacos -d -p 8848:8848 nacos/nacos-server
+docker run -p 8848:8848 -p 9848:9848 -p 9849:9849 -e NACOS_AUTH_ENABLE=true -e MODE=standalone -e JVM_XMS=2048m -e JVM_XMX=2048m -e JVM_XMN=2048m -v E:\dockerdata\nacos\logs:/home/nacos/logs -v E:\dockerdata\nacos\conf\:/home/nacos/conf --network common-network --privileged=true --restart=always --name nacos -d nacos/nacos-server
 
 
 ### seata启动语句
