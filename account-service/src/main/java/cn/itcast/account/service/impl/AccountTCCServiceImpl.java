@@ -50,13 +50,16 @@ public class AccountTCCServiceImpl implements AccountTCCService {
         // 0.查询冻结记录
         String xid = ctx.getXid();
         AccountFreeze freeze = freezeMapper.selectById(xid);
+        int count = 0;
+        if(freeze !=null){
+            // 1.恢复可用余额
+            accountMapper.refund(freeze.getUserId(), freeze.getFreezeMoney());
+            // 2.将冻结金额清零，状态改为CANCEL
+            freeze.setFreezeMoney(0);
+            freeze.setState(AccountFreeze.State.CANCEL);
+            count = freezeMapper.updateById(freeze);
+        }
 
-        // 1.恢复可用余额
-        accountMapper.refund(freeze.getUserId(), freeze.getFreezeMoney());
-        // 2.将冻结金额清零，状态改为CANCEL
-        freeze.setFreezeMoney(0);
-        freeze.setState(AccountFreeze.State.CANCEL);
-        int count = freezeMapper.updateById(freeze);
         return count == 1;
     }
 }
